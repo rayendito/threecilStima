@@ -32,6 +32,12 @@ class Graph:
             map_object = map(int, a_list)
             self.adjMat.append(list(map_object))
     
+    def getSimps(self):
+        return self.simps
+    
+    def getAdjMat(self):
+        return self.adjMat
+
     def printSimps(self):
         for i in self.simps:
             print(i.getName() + str(i.getX()) + str(i.getY()))
