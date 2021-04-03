@@ -1,3 +1,5 @@
+from math import radians, cos, sin, asin, sqrt
+
 class Simpul:
     def __init__(self, name, x, y):
         self.name = name
@@ -31,7 +33,31 @@ class Graph:
             a_list = lines[i].split()
             map_object = map(int, a_list)
             self.adjMat.append(list(map_object))
+
+        for i in range(ens):
+            for j in range(ens):
+                if(i<j and self.adjMat[i][j] != 0):
+                    hv = self.getDistHaversine(self.simps[i], self.simps[j])
+                    self.adjMat[i][j] = hv
+                    self.adjMat[j][i] = hv
+                    
     
+    def getDistHaversine(self, pointA, pointB):
+        #jadikan dalam satuan radian
+        loA = radians(pointA.getY())
+        loB = radians(pointB.getY())
+        laA = radians(pointA.getX())
+        laB = radians(pointB.getX())
+
+        #rumus haversine
+        slon = loB - loA 
+        slat = laB - laA
+        a = sin(slat / 2)**2 + cos(laA) * cos(laB) * sin(slon / 2)**2
+        
+        #return
+        return(2 * asin(sqrt(a)) * 6371)
+
+
     def getSimps(self):
         return self.simps
     
