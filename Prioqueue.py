@@ -4,11 +4,16 @@ import Graph
 class Path:
     # CostsoFar = jarak sebenarnya
     # bobot = jarak sebenarnya + sld
-    def __init__(self, arraySimps, costSoFar, Bobot):
-        self.arraySimps = arraySimps
+    def __init__(self, arraySimpul, costSoFar, Bobot):
+        self.arraySimps = []
+        for item in arraySimpul:
+            self.arraySimps.append(item)
         self.Bobot = Bobot
         self.costSoFar = costSoFar
     
+    def insertNewSimp(self, newSimpul):
+        self.arraySimps.append(newSimpul)
+
     def getCostSoFar(self):
         return self.costSoFar
 
@@ -19,13 +24,12 @@ class Path:
         return self.Bobot
 
     def printPath(self):
-        print("List Path : ")
-        if(len(self.arraySimps) == 1):
-            print(self.arraySimps[0].getName())
-        else:
-            for i in self.arraySimps:
-                print(i.getName(), end=" -> ")
-            print()
+        print("Path : ")
+        for i in range (len(self.arraySimps)):
+            if(i == len(self.arraySimps)-1):
+                 print(self.arraySimps[i].getName())
+            else:
+                print(self.arraySimps[i].getName(), end=" -> ")
         print("Bobot", self.Bobot)
 
 class PrioQueue:
@@ -91,3 +95,18 @@ class PrioQueue:
 
 # Queue.printQueue()
 
+
+# s1 = Simpul("DayangSumbi", 0, 12,0)
+# s2 = Simpul("TubagusIsmail", 2, 40,1)
+# s3 = Simpul("Siliwangi", 3, 26,2)
+# s4 = Simpul("Tegallega", 7, 11,3)
+# s5 = Simpul("Bubat", 31, 5,4)
+# q = PrioQueue()
+# p = Path([s1,s2], 5, 10)
+# s = Path([s3,s4], 10, 20)
+# q.enqueue(p)
+# q.enqueue(s)
+# q.dequeue()
+# print(q.Top().getBobot())
+# q.printQueue()
+# graf.printAdjMat()
