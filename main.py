@@ -17,8 +17,14 @@ def getSimpulFromIndex(index, ArraySimps):
             return item
     return -1 # kalau ga ditemukan
 
+def getSimpulbyName(Name, ArraySimps):
+    for item in ArraySimps:
+        if(item.getName() == Name):
+            return item
+    return -1 # error code
+
 # Find path using A* algorithm
-# Source dan destination bertipe SImpul
+# Source dan destination bertipe Simpul
 # Mengembalikan array 1 elemeen bertipe Path
 def findPath(source, destination, Graf):
     FinalPath = []
@@ -63,7 +69,7 @@ def findPath(source, destination, Graf):
         if(found and (Queue.isEmpty() or FinalPath[0].getBobot() <= Queue.Top().getBobot())):
             print("Pencarian selesai, telah ditemukan")
             return FinalPath
-    # Jika tidak ditemukan, FInalPath kosong
+    # Jika tidak ditemukan, FinalPath kosong
     return FinalPath
 
 graf = Graph("Alunalun.txt")
@@ -74,10 +80,16 @@ graf = Graph("Alunalun.txt")
 # print("Jarak antara : " + str(allSimpul[0].getName()) + " " + str(allSimpul[1].getName()))
 # print(graf.getDistHaversine(allSimpul[0], allSimpul[1]))
 
-# item = getSimpulFromIndex(5, graf.getSimps())
-
-# path = findPath(graf.getSimps()[1], graf.getSimps()[0], graf)
-# path = findPath(graf.getSimps()[0], graf.getSimps()[1], graf)
-# path = findPath(graf.getSimps()[0], graf.getSimps()[5], graf)
+# print("================ TC 1 ===========================")
+# path = findPath(graf.getSimps()[0], graf.getSimps()[4], graf)
+# path[0].printPath()
+# path = findPath(graf.getSimps()[5], graf.getSimps()[3], graf)
+# print("================ TC 2 ===========================")
+# path[0].printPath()
+# path = findPath(graf.getSimps()[3], graf.getSimps()[7], graf)
+# print("================ TC 3 ===========================")
+# path[0].printPath()
+# path = findPath(graf.getSimps()[9], graf.getSimps()[2], graf)
+# print("================ TC 4 ===========================")
 # path[0].printPath()
 
