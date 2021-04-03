@@ -66,12 +66,12 @@ class Graph:
 
     def printSimps(self):
         for i in self.simps:
-            print(i.getName() + str(i.getX()) + str(i.getY()))
+            print(i.getName() + " " + str(i.getX()) + " " + str(i.getY()))
 
     def printAdjMat(self):
         for i in self.adjMat:
             print(i)
 
-a = Graph("sample.txt")
-a.printAdjMat()
-a.printSimps()
+# a = Graph("sample.txt")
+# a.printAdjMat()
+# a.printSimps()
