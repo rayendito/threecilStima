@@ -16,23 +16,21 @@ class Path:
         print("List Path : ")
         for i in self.arraySimps:
             print("Nama :",i.getName(), "; longitude :",i.getX(),"; latitude :", i.getY(), end=" ")
-            print("; Bobot", self.Bobot)
+        print()
+        print("Bobot", self.Bobot)
 
 class PrioQueue:
     def __init__(self):
         self.Queue = [] # Berisi tipe Path
 
     def enqueue(self, Path):
-        if(len(self.Queue) == 0):
+        i = 0
+        while(i < len(self.Queue) and Path.Bobot > self.Queue[i].Bobot):
+            i += 1
+        if(i == len(self.Queue)):
             self.Queue.append(Path)
         else:
-            i = 0
-            while(i < len(self.Queue) and Path.Bobot > self.Queue[i].Bobot):
-                i += 1
-            if(i == len(self.Queue)):
-                self.Queue.append(Path)
-            else:
-                self.Queue.insert(i, Path)
+            self.Queue.insert(i, Path)
     
 
     def isEmpty(self):
@@ -55,30 +53,30 @@ class PrioQueue:
 ''' TESTING '''
 # Construct path
 
-s1 = Graph.Simpul("DayangSumbi", 0, 12)
-s2 = Graph.Simpul("TubagusIsmail", 2, 40)
-s3 = Graph.Simpul("Siliwangi", 3, 26)
-s4 = Graph.Simpul("Tegallega", 7, 11)
-s5 = Graph.Simpul("Bubat", 31, 5)
+# s1 = Graph.Simpul("DayangSumbi", 0, 12)
+# s2 = Graph.Simpul("TubagusIsmail", 2, 40)
+# s3 = Graph.Simpul("Siliwangi", 3, 26)
+# s4 = Graph.Simpul("Tegallega", 7, 11)
+# s5 = Graph.Simpul("Bubat", 31, 5)
 
-path1 = Path([s1,s2], 10)
-path2 = Path([s3], 20)
-path3 = Path([s4], 5)
-path4 = Path([s5], 17)
+# path1 = Path([s1,s2], 10)
+# path2 = Path([s3], 20)
+# path3 = Path([s4], 5)
+# path4 = Path([s5], 17)
 
-# Construct queue
-Queue = PrioQueue()
-# Test enqueue
-Queue.enqueue(path1)
-Queue.enqueue(path2)
-Queue.enqueue(path3)
-Queue.enqueue(path4)
+# # Construct queue
+# Queue = PrioQueue()
+# # Test enqueue
+# Queue.enqueue(path1)
+# Queue.enqueue(path2)
+# Queue.enqueue(path3)
+# Queue.enqueue(path4)
+# # Queue.printQueue()
+# # Delete queue
+# while(not Queue.isEmpty()):
+#     first = Queue.dequeue()
+#     # print(first.arraySimps[0].getName())
+#     first.printPath()
+
 # Queue.printQueue()
-# Delete queue
-while(not Queue.isEmpty()):
-    first = Queue.dequeue()
-    # print(first.arraySimps[0].getName())
-    first.printPath()
-
-Queue.printQueue()
 
