@@ -2,10 +2,16 @@ import Graph
 
 
 class Path:
-    def __init__(self, arraySimps, Bobot):
+    # CostsoFar = jarak sebenarnya
+    # bobot = jarak sebenarnya + sld
+    def __init__(self, arraySimps, costSoFar, Bobot):
         self.arraySimps = arraySimps
         self.Bobot = Bobot
+        self.costSoFar = costSoFar
     
+    def getCostSoFar(self):
+        return self.costSoFar
+
     def getArraySimps(self):
         return self.arraySimps
 
@@ -14,9 +20,12 @@ class Path:
 
     def printPath(self):
         print("List Path : ")
-        for i in self.arraySimps:
-            print("Nama :",i.getName(), "; longitude :",i.getX(),"; latitude :", i.getY(), end=" ")
-        print()
+        if(len(self.arraySimps) == 1):
+            print(self.arraySimps[0].getName())
+        else:
+            for i in self.arraySimps:
+                print(i.getName(), end=" -> ")
+            print()
         print("Bobot", self.Bobot)
 
 class PrioQueue:
@@ -32,6 +41,8 @@ class PrioQueue:
         else:
             self.Queue.insert(i, Path)
     
+    def Top(self):
+        return self.Queue[0]
 
     def isEmpty(self):
         return (len(self.Queue) == 0)
