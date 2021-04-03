@@ -1,6 +1,9 @@
 # threecilStima
 Tugas Kecil Strategi Algoritma
 
+## Instalasi
+- `pip install folium`
+
 ## TODO
 
 - Bikin contoh file
