@@ -93,3 +93,60 @@ graf = Graph("Alunalun.txt")
 # print("================ TC 4 ===========================")
 # path[0].printPath()
 
+
+def createAllMarker(arraySimpul, m): # f= figure group, m = map
+    f=folium.FeatureGroup("Simpul")
+    for simpul in arraySimpul:
+        folium.Marker(location=[simpul.getX(), simpul.getY()],popup=simpul.getName(),
+                      icon = folium.Icon(color="green"),
+                      tooltip=simpul.getName()).add_to(f)
+    f.add_to(m)
+
+# Draw All line
+def drawPathfromGraph(listSimpul, adjMat, Map):
+    f1=folium.FeatureGroup("All path")
+    for i in range(len(mat)):
+        for j in range(len(mat)):
+            if(i<j and mat[i][j] != 0):
+                garis = [[listSimpul[i].getX(), listSimpul[i].getY()], [listSimpul[j].getX(), listSimpul[j].getY()]]
+                line_1=folium.vector_layers.PolyLine(garis,popup="Jarak : " + str(adjMat[i][j]) + " km",
+                                                     tooltip=listSimpul[i].getName() + " - " + listSimpul[j].getName(),
+                                                     color='#4878b8',weight=7.5).add_to(f1)
+    f1.add_to(Map)
+
+
+# Draw final path
+def drawFinalPath(Path, Map, arraySimpFromGraf, adjMat):
+    f=folium.FeatureGroup("Final Path")
+    for i in range (len(Path.getArraySimps())-1):
+        indexA = Path.getArraySimps()[i].getIndex()
+        simpA = getSimpulFromIndex(indexA, arraySimpFromGraf)
+        indexB = Path.getArraySimps()[i+1].getIndex()
+        simpB = getSimpulFromIndex(indexB, arraySimpFromGraf)
+        garis = [[simpA.getX(), simpA.getY()], [simpB.getX(), simpB.getY()]]
+        line_1=folium.vector_layers.PolyLine(garis, 
+                                             popup = "Jarak : " + str(adjMat[indexA][indexB]) + " km",
+                                             tooltip=simpA.getName() + " - " + simpB.getName(),
+                                             color='#cf1b1b',weight=7.5).add_to(f)
+    f.add_to(Map)
+    
+    # Tambahkan marker untuk path final,ntar aja di main deng
+    # createAllMarker(Path.getArraySimps(), Map, "orange", "labelGroup")
+    
+
+''' TEST ''' 
+# #print jalan
+# from Graph import Graph, Simpul
+# from Prioqueue import PrioQueue, Path
+# import main as mn
+# a = Graph("buahbatu.txt")
+# listSimpul = a.getSimps()
+# adjmat = a.getAdjMat()
+# p = Path([listSimpul[0], listSimpul[5], listSimpul[4]], 100, 50) # Testing
+
+# m=folium.Map(location=[listSimpul[0].getX(), listSimpul[0].getY()], zoom_start=15)
+# createAllMarker(listSimpul, m, "cadetblue", "All Vertex")
+# drawPathfromGraph(listSimpul, adjmat, m)
+# drawFinalPath(p, m, listSimpul, adjmat)
+# folium.LayerControl().add_to(m)
+# m
