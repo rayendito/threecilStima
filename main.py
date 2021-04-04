@@ -68,7 +68,7 @@ def findPath(source, destination, Graf):
                 arraySimpulBaru.pop()
         # Sudah tidak ada jalur yang lebih pendek dari final path sekarang
         if(found and (Queue.isEmpty() or FinalPath[0].getBobot() <= Queue.Top().getBobot())):
-            print("Pencarian selesai, telah ditemukan")
+            FinalPath[0].printPath()
             return FinalPath
     # Jika tidak ditemukan, FinalPath kosong
     return FinalPath

@@ -24,13 +24,13 @@ class Path:
         return self.Bobot
 
     def printPath(self):
-        print("Path : ")
+        print("Jalur : ")
         for i in range (len(self.arraySimps)):
             if(i == len(self.arraySimps)-1):
                  print(self.arraySimps[i].getName())
             else:
-                print(self.arraySimps[i].getName(), end=" -> ")
-        print("Bobot", self.Bobot)
+                print(self.arraySimps[i].getName(), end=" → ")
+        print("Jarak tempuh : ", round(self.Bobot*1000,2), "m")
 
 class PrioQueue:
     def __init__(self):
