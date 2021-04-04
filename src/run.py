@@ -1,7 +1,6 @@
 #untuk map
 import folium
 from folium import plugins
-from folium.plugins import Fullscreen
 
 #untuk rute
 from Graph import Graph, Simpul
@@ -10,6 +9,44 @@ from function import *
 
 #untuk widget tool
 import ipywidgets as widgets
+
+### MARKER AND PATH ROUTE ###
+def createAllMarker(arraySimpul, m, warna, labelGroup): # f= figure group, m = map
+    f=folium.FeatureGroup(labelGroup)
+    for simpul in arraySimpul:
+        folium.Marker(location=[simpul.getX(), simpul.getY()],popup=simpul.getName(),
+                      icon = folium.Icon(color=warna),
+                      tooltip=simpul.getName()).add_to(f)
+    f.add_to(m)
+
+# Draw All line
+def drawPathfromGraph(listSimpul, adjMat, Map):
+    f1=folium.FeatureGroup("All path")
+    for i in range(len(adjMat)):
+        for j in range(len(adjMat)):
+            if(i<j and adjMat[i][j] > 0):
+                garis = [[listSimpul[i].getX(), listSimpul[i].getY()], [listSimpul[j].getX(), listSimpul[j].getY()]]
+                line_1=folium.vector_layers.PolyLine(garis,popup="Jarak : " + str(adjMat[i][j]) + " km",
+                                                     tooltip=listSimpul[i].getName() + " - " + listSimpul[j].getName(),
+                                                     color='#4878b8',weight=7.5).add_to(f1)
+    f1.add_to(Map)
+
+
+# Draw final path
+def drawFinalPath(Path, Map, arraySimpFromGraf, adjMat):
+    f=folium.FeatureGroup("Final Path")
+    for i in range (len(Path.getArraySimps())-1):
+        indexA = Path.getArraySimps()[i].getIndex()
+        simpA = getSimpulFromIndex(indexA, arraySimpFromGraf)
+        indexB = Path.getArraySimps()[i+1].getIndex()
+        simpB = getSimpulFromIndex(indexB, arraySimpFromGraf)
+        garis = [[simpA.getX(), simpA.getY()], [simpB.getX(), simpB.getY()]]
+        line_1=folium.vector_layers.PolyLine(garis, 
+                                             popup = "Jarak : " + str(adjMat[indexA][indexB]) + " km",
+                                             tooltip=simpA.getName() + " - " + simpB.getName(),
+                                             color='#cf1b1b',weight=7.5).add_to(f)
+    f.add_to(Map)
+
 
 ### WIDGETS ###
 #input box text file
@@ -105,6 +142,10 @@ def searchGo(event):
             drawFinalPath(finalP, m, listSimpul, adjmat)
             createAllMarker(finalP.getArraySimps(), m, "orange", "Visited")
             folium.LayerControl().add_to(m)
+            #Add scroll Zoom toggler left bottom
+            plugins.ScrollZoomToggler().add_to(m)
+            # Add fullscreen button
+            plugins.Fullscreen(position='topright').add_to(m)
 
             #mencetak map ke layar
             display(m)
@@ -125,6 +166,10 @@ def fileSelect(event):
             m = folium.Map(location=[listSimpul[0].getX(), listSimpul[0].getY()], width='100%', height='100%', zoom_start=15.5)
             createAllMarker(listSimpul, m, "cadetblue", "All Vertex")
             drawPathfromGraph(listSimpul, adjmat, m)
+            #Add scroll Zoom toggler left bottom
+            plugins.ScrollZoomToggler().add_to(m)
+            # Add fullscreen button
+            plugins.Fullscreen(position='topright').add_to(m)
 
             #set options untuk dropdown
             names = []
