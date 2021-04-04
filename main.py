@@ -1,6 +1,7 @@
 
 from Graph import Graph, Simpul
 from Prioqueue import PrioQueue, Path
+import folium
 
 
 # Mengecek apakah pada suatu path sudah terdapatt simpul yang dicari
@@ -94,20 +95,20 @@ graf = Graph("Alunalun.txt")
 # path[0].printPath()
 
 
-def createAllMarker(arraySimpul, m): # f= figure group, m = map
-    f=folium.FeatureGroup("Simpul")
+def createAllMarker(arraySimpul, m, warna, labelGroup): # f= figure group, m = map
+    f=folium.FeatureGroup(labelGroup)
     for simpul in arraySimpul:
         folium.Marker(location=[simpul.getX(), simpul.getY()],popup=simpul.getName(),
-                      icon = folium.Icon(color="green"),
+                      icon = folium.Icon(color=warna),
                       tooltip=simpul.getName()).add_to(f)
     f.add_to(m)
 
 # Draw All line
 def drawPathfromGraph(listSimpul, adjMat, Map):
     f1=folium.FeatureGroup("All path")
-    for i in range(len(mat)):
-        for j in range(len(mat)):
-            if(i<j and mat[i][j] != 0):
+    for i in range(len(adjMat)):
+        for j in range(len(adjMat)):
+            if(i<j and adjMat[i][j] > 0):
                 garis = [[listSimpul[i].getX(), listSimpul[i].getY()], [listSimpul[j].getX(), listSimpul[j].getY()]]
                 line_1=folium.vector_layers.PolyLine(garis,popup="Jarak : " + str(adjMat[i][j]) + " km",
                                                      tooltip=listSimpul[i].getName() + " - " + listSimpul[j].getName(),
@@ -135,18 +136,26 @@ def drawFinalPath(Path, Map, arraySimpFromGraf, adjMat):
     
 
 ''' TEST ''' 
-# #print jalan
-# from Graph import Graph, Simpul
-# from Prioqueue import PrioQueue, Path
-# import main as mn
-# a = Graph("buahbatu.txt")
+# a = Graph("itb.txt")
 # listSimpul = a.getSimps()
 # adjmat = a.getAdjMat()
-# p = Path([listSimpul[0], listSimpul[5], listSimpul[4]], 100, 50) # Testing
 
-# m=folium.Map(location=[listSimpul[0].getX(), listSimpul[0].getY()], zoom_start=15)
+# # A* algorithm
+# p = findPath(listSimpul[0], listSimpul[8], a)
+# finalP = p[0]
+# # Path([listSimpul[0], listSimpul[2], listSimpul[4]], 100, 50) # Testing
+
+# m=folium.Map(location=[listSimpul[0].getX(), listSimpul[0].getY()], zoom_start=15.5)
 # createAllMarker(listSimpul, m, "cadetblue", "All Vertex")
 # drawPathfromGraph(listSimpul, adjmat, m)
-# drawFinalPath(p, m, listSimpul, adjmat)
+# drawFinalPath(finalP, m, listSimpul, adjmat)
+# # Tambahkan marker untuk path final,ntar aja di main deng
+# createAllMarker(finalP.getArraySimps(), m, "orange", "labelGroup")
 # folium.LayerControl().add_to(m)
+
+# # Add scroll Zoom toggler left bottom
+# # plugins.ScrollZoomToggler().add_to(m)
+# # # Add fullscreen button
+# # plugins.Fullscreen(position='topright').add_to(m)
 # m
+

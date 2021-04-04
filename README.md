@@ -2,8 +2,11 @@
 Tugas Kecil Strategi Algoritma
 
 ## Instalasi
+- Python terinstall
+- Memiliki extension jupyter pada vs code atau menggunakan jupyter notebook lain
 - `pip install folium`
-
+- `pip install ipywidgets`
+- `jupyter nbextension enable --py widgetsnbextension`
 ## TODO
 
 - Bikin contoh file
