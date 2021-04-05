@@ -1,8 +1,6 @@
 
 from Graph import Graph, Simpul
 from Prioqueue import PrioQueue, Path
-import folium
-
 
 # Mengecek apakah pada suatu path sudah terdapatt simpul yang dicari
 def dikunjungi(path, indexDicari):
@@ -72,29 +70,3 @@ def findPath(source, destination, Graf):
             return FinalPath
     # Jika tidak ditemukan, FinalPath kosong
     return FinalPath
-
-
-''' TEST ''' 
-# a = Graph("itb.txt")
-# listSimpul = a.getSimps()
-# adjmat = a.getAdjMat()
-
-# # A* algorithm
-# p = findPath(listSimpul[0], listSimpul[8], a)
-# finalP = p[0]
-# # Path([listSimpul[0], listSimpul[2], listSimpul[4]], 100, 50) # Testing
-
-# m=folium.Map(location=[listSimpul[0].getX(), listSimpul[0].getY()], zoom_start=15.5)
-# createAllMarker(listSimpul, m, "cadetblue", "All Vertex")
-# drawPathfromGraph(listSimpul, adjmat, m)
-# drawFinalPath(finalP, m, listSimpul, adjmat)
-# # Tambahkan marker untuk path final,ntar aja di main deng
-# createAllMarker(finalP.getArraySimps(), m, "orange", "labelGroup")
-# folium.LayerControl().add_to(m)
-
-# # Add scroll Zoom toggler left bottom
-# # plugins.ScrollZoomToggler().add_to(m)
-# # # Add fullscreen button
-# # plugins.Fullscreen(position='topright').add_to(m)
-# m
-

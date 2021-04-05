@@ -150,7 +150,7 @@ def searchGo(event):
             #mencetak map ke layar
             display(m)
         except IndexError:
-            #jika asal dan tujuan di tempat yang sama
+            #jika asal dan tujuan di tempat yang sama atau jalur tidak ditemukan
             print("0 m")
 
 def fileSelect(event):

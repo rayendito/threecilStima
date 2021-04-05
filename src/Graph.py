@@ -75,7 +75,3 @@ class Graph:
     def printAdjMat(self):
         for i in self.adjMat:
             print(i)
-
-# a = Graph("Alunalun.txt")
-# a.printAdjMat()
-# a.printSimps()
