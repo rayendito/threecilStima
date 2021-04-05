@@ -131,27 +131,33 @@ def searchGo(event):
         try:
             outputSearch.clear_output()
             #mencari dari asal ke tujuan dengan A*
-            p = findPath(getSimpulbyName(asal.value,listSimpul), getSimpulbyName(tujuan.value,listSimpul), a)
-            #path hasil adahal p[0]
-            finalP = p[0]
+            source = getSimpulbyName(asal.value,listSimpul)
+            destination = getSimpulbyName(tujuan.value,listSimpul)
+            if(source.getName() == destination.getName()):
+                # jika asal dan tujuan di tempat yang sama
+                print("0 m")
+            else:
+                p = findPath(getSimpulbyName(asal.value,listSimpul), getSimpulbyName(tujuan.value,listSimpul), a)
+                #path hasil adalah p[0]
+                finalP = p[0]
 
-            #menggambar alur ke layar
-            m=folium.Map(location=[listSimpul[0].getX(), listSimpul[0].getY()], width='100%', height='100%', zoom_start=15.5)
-            createAllMarker(listSimpul, m, "cadetblue", "All Vertex")
-            drawPathfromGraph(listSimpul, adjmat, m)
-            drawFinalPath(finalP, m, listSimpul, adjmat)
-            createAllMarker(finalP.getArraySimps(), m, "orange", "Visited")
-            folium.LayerControl().add_to(m)
-            #Add scroll Zoom toggler left bottom
-            plugins.ScrollZoomToggler().add_to(m)
-            # Add fullscreen button
-            plugins.Fullscreen(position='topright').add_to(m)
+                #menggambar alur ke layar
+                m=folium.Map(location=[listSimpul[0].getX(), listSimpul[0].getY()], width='100%', height='100%', zoom_start=15.5)
+                createAllMarker(listSimpul, m, "cadetblue", "All Vertex")
+                drawPathfromGraph(listSimpul, adjmat, m)
+                drawFinalPath(finalP, m, listSimpul, adjmat)
+                createAllMarker(finalP.getArraySimps(), m, "orange", "Visited")
+                folium.LayerControl().add_to(m)
+                #Add scroll Zoom toggler left bottom
+                plugins.ScrollZoomToggler().add_to(m)
+                # Add fullscreen button
+                plugins.Fullscreen(position='topright').add_to(m)
 
-            #mencetak map ke layar
-            display(m)
+                #mencetak map ke layar
+                display(m)
         except IndexError:
-            #jika asal dan tujuan di tempat yang sama atau jalur tidak ditemukan
-            print("0 m")
+            # Jalur tidak ditemukan
+            print("Jalur tidak ditemukan")
 
 def fileSelect(event):
     with outputFileSelect:
