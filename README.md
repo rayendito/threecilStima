@@ -35,6 +35,7 @@ Pada terminal, jalankan perintah berikut :
 - Berekstensi `.txt`
 - Baris pertama berisi jumlah simpul
 - Baris selanjutnya, diisi oleh `namasimpul longitude latitude` sejumlah banyaknya simpul
+- Namasimpul tanpa spasi
 - Selanjutnya diisi oleh matriks ketetanggaan antar simpul
 - Contoh masukan dapat dilihat pada folder test
 
