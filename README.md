@@ -1,5 +1,5 @@
 # ThreeChill GOOGOLMEPZ
-> Sebuah program untuk melakukan path finding menggunakan algoritma A*. Untuk mengetahui mengenai A* Algorithm dapat membuka tautan [ini](https://www.geeksforgeeks.org/a-search-algorithm/)
+> Sebuah program untuk melakukan path finding berdasarkan file .txt menggunakan algoritma A*. Untuk mengetahui mengenai A* Algorithm dapat membuka tautan [ini](https://www.geeksforgeeks.org/a-search-algorithm/)
 
 ## Daftar Isi
 - [ThreeChill GOOGOLMEPZ](#threechill-googolmepz)
